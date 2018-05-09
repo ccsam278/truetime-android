@@ -54,6 +54,11 @@ public class TrueTime {
         saveTrueTimeInfoToDisk();
     }
 
+    public void freshInitialize() throws IOException {
+        freshInitialize(_ntpHost);
+        saveTrueTimeInfoToDisk();
+    }
+
     /**
      * Cache TrueTime initialization information in SharedPreferences
      * This can help avoid additional TrueTime initialization on app kills
@@ -116,6 +121,10 @@ public class TrueTime {
         }
 
         requestTime(ntpHost);
+    }
+
+    protected void freshInitialize(String ntpHost) throws IOException {
+         requestTime(ntpHost);
     }
 
     long[] requestTime(String ntpHost) throws IOException {
